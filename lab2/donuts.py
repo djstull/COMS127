@@ -9,5 +9,5 @@ cost = amount * .75
 cost = cost + (dozens * 8)
 
 print ("$", cost)
-print (dozens, "Dozen")
-print (amount, "Singles")
+print (dozens, "Dozen Donuts")
+print (amount, "Remaining Donuts")
