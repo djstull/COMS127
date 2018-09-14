@@ -13,7 +13,7 @@ elif status in ["n"]:
     #overtime determines how many hours over 40 the person has worked.
     overtime = (hours - 40)
     hours = (hours - overtime)
-    wage = (hours * hourly) + ( overtime * 5.5)
+    wage = (hours * hourly) + (overtime * (5.5))
 else:
     pass
 
