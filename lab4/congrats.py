@@ -1,4 +1,3 @@
-import inspect
 def congrats(name):
-    return inspect.getargspec(name).args
-
+    print("Good job, %s!" % (name))
+    pass

@@ -1,2 +1,5 @@
 from congrats import congrats
-congrats(jeff)
+from hypotenuse import print_hypo
+
+print(congrats("Jeff"))
+print(print_hypo(2, 2))
