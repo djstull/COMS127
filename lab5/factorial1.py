@@ -5,7 +5,3 @@ def factorial(n):
         return n * (n-1)
 
 print(factorial(3))
-
-def cal_interest(amount, rate, years):
-    total = (amount * rate)
-    
