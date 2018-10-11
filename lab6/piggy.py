@@ -4,7 +4,7 @@ def convert_word(word):
     vowel = vowelfinder(word)
     first_letter = word[0]
     if first_letter in ["a","e","i","o","u"]:
-        return word + "hay"
+        return word + "way"
     else:
         return word[vowel:] + word[:vowel] + "ay"
 
