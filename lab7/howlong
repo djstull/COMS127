@@ -1,0 +1,8 @@
+def how_long(given_amount, stripend, rate,):
+    months = 0
+    while given_amount >= 0:
+        given_amount = (given_amount + (given_amount * rate)) - stripend
+        months +=1
+    return months
+
+print(how_long(10000, 400, .005))

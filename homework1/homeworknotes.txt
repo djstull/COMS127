@@ -1,0 +1,27 @@
+Home work #1 - Due Oct 25, 2018
+Create functions to convert between balanced ternary numbers to integers
+and from integers to ternary numbers.
+
+Use procedural decomposition to break the general problem down into
+simpler functions.
+
+convert_to_decimal(n)
+    Given a string n return the decimal representation as an int.
+    n is a balanced ternary number
+    If n is invalid, print an error and return 0.
+
+convert_to_balanced_ternary(n)
+    Given any integer n, returns a string representing the
+    corresponding balanced ternary number.
+
+negate(n)
+    Given a string n representing a balanced ternary number, returns the
+    string representing -n
+    (USE THIS INSIDE OF THE convert_to_balanced_ternary(n)) If n is empty
+    return an empty string.
+
+is_valid_balanced_ternary(n)
+    Given a string n, returns "True" if n is a balanced ternary number
+    (Contains only the charters -, 0, and +) and returns "False" otherwise.
+    (USE THIS INSIDE OF convert_to_decimal(n))
+
