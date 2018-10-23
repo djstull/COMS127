@@ -25,3 +25,13 @@ is_valid_balanced_ternary(n)
     (Contains only the charters -, 0, and +) and returns "False" otherwise.
     (USE THIS INSIDE OF convert_to_decimal(n))
 
+1. You have two files to submit they are bt.py and bt_test.py
+
+2. the bt.py file contains your 4 defined functions, please make sure the function names are match (the input parameter doesn't have to)
+• convert_to_decimal(n)
+• convert_to_balanced_ternary(n)
+• negate(n)
+• is_valid_balanced_ternary(n)
+
+3. the bt_test contains the 4 test programs and test cases for function negate(), you only need to add test cases for the other 3 functions (I suggest at least 3 cases for each function).
+
