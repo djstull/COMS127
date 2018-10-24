@@ -1,4 +1,4 @@
-from bt import *
+from bt import is_balanced_ternary
 
 #
 # Helper functions for testing
