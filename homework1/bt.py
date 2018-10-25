@@ -1,6 +1,7 @@
 # David James (DJ) Stull
-# Com S 127
-
+# Com Sci 127
+# This script has four functions that are all useful in converting back and forth in between decimal (base 10) numbers
+# and balanced ternary numbers.
 
 def convert_to_decimal(n):
     # Takes any balanced ternary number and converts it to the base 10 decimal equivalent.
@@ -64,6 +65,7 @@ def convert_to_balanced_ternary(n):
         out = "".join(out)
         return out
 
+
 def negate(n):
     # Makes any balanced ternary number negative.
     # Builds the negated string character by character.
@@ -97,33 +99,4 @@ def is_valid_balanced_ternary(n):
 
     return set(n).issubset({"+", "-", "0"})
 
-# Test cases for BALANCED TERNARY CHECK -- Complete
-# print(is_valid_balanced_ternary("+-+--0-+0"))
-# print(is_valid_balanced_ternary("---------"))
-# print(is_valid_balanced_ternary("+++++++r++"))
-# print(is_valid_balanced_ternary("000000000"))
-
-# Test cases for NEGATE -- Complete
-# print(negate("+-+--0-+0"))
-# print(negate("+++++++++"))
-# print(negate("---------"))
-# print(negate("000000000"))
-
-# Test cases for CONVERT TO DECIMAL -- Complete
-# print(convert_to_decimal("+-+--0-+0"))
-# ^ Should be 4773
-# print(convert_to_decimal("-+++0-"))
-# ^ Should be -127
-# print(convert_to_decimal("++"))
-# ^ Should be 4
-# print(convert_to_decimal(69))
-# ^ Should print error and return 0
-
-
-# Test cases for CONVERT TO BALANCED TERNARY -- Incomplete
-# print(convert_to_balanced_ternary(4))
-# ^ Should return ++
-# print(convert_to_balanced_ternary(4773))
-# ^ Should return +-+--0-+0
-# print(convert_to_balanced_ternary(-4773))
-# ^ Should return -+-++0+-0
+# See bt_test.py for numerous test cases for each of the functions/
