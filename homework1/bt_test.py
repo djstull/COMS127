@@ -1,4 +1,4 @@
-from bt import is_balanced_ternary
+from bt import negate
 
 #
 # Helper functions for testing

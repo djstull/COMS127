@@ -29,49 +29,61 @@ def convert_to_decimal(n):
 
 
 def convert_to_balanced_ternary(n):
-    if n < 0:
-        isneg = True
-    elif n > 0:
-        isneg = False
+    # Converts a decimal number to a balanced ternary number.
+
+    if n == 0:
+        return ['0']
+
+    # Check for negative numbers
+    neg = (n < 0)
+    if neg:
+        n *= -1
+
+    rem = 0
+    out = []
+
+    while n >= 0 and not (n == 0 and rem == 1):
+        rem, n = n % 3, n // 3
+        if rem == 0:
+            out.append('0')
+        elif rem == 1:
+            out.append('+')
+        else:
+            out.append('-')
+            n += 1
+    out.reverse()
+
+    # Finally outputs the balanced ternary form of the decimal number. If the decimal was negative,
+    # outputs the negate of the outputted balanced ternary instead.
+
+    if neg:
+        out = "".join(out)
+        outneg = negate(out)
+        return outneg
     else:
-        isneg = "Zero"
-
-    if isneg is True:
-        n = str(n)
-        n = n.replace("-", "")
-    else:
-        pass
-
-    n = str(n)
-    counter = len(n)
-    print(counter)
-    n = int(n)
-
-    output = ""
-
-    while counter >= 0:
-        conv = (n % 3)
-        if conv == 0:
-            output = output + "0"
-        elif conv == 1:
-            output = output + "+"
-        elif conv == -1:
-            output = output + "-"
-        counter = counter - 1
-    return output
-
-
-
+        out = "".join(out)
+        return out
 
 def negate(n):
     # Makes any balanced ternary number negative.
-    # It replaces + with NULL first in order to avoid copying over the newly replaced - characters.
+    # Builds the negated string character by character.
 
-    for i in n:
-        n = n.replace("+", "NULL")
-        n = n.replace("-", "+")
-        n = n.replace("NULL", "-")
-    return n
+    balanced = is_valid_balanced_ternary(n)
+    neg = ""
+    if balanced is True:
+        for i in n:
+            if i == "+":
+                neg = neg + "-"
+            elif i == "-":
+                neg = neg + "+"
+            elif i == "0":
+                neg = neg + "0"
+            else:
+                pass
+        return neg
+    else:
+        print("ERROR: n is not a balanced ternary.")
+        return 0
 
 
 def is_valid_balanced_ternary(n):
@@ -109,7 +121,9 @@ def is_valid_balanced_ternary(n):
 
 
 # Test cases for CONVERT TO BALANCED TERNARY -- Incomplete
-print(convert_to_balanced_ternary(4))
+# print(convert_to_balanced_ternary(4))
 # ^ Should return ++
-print(convert_to_balanced_ternary(4773))
+# print(convert_to_balanced_ternary(4773))
 # ^ Should return +-+--0-+0
+# print(convert_to_balanced_ternary(-4773))
+# ^ Should return -+-++0+-0
