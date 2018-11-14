@@ -3,6 +3,7 @@
 
 import sys
 import time
+import random
 import numpy as np
 
 
@@ -41,11 +42,15 @@ def print_plane(plane):
 
 
 def count_neighbors(plane, x, y):
+    print(plane[y - 1, x - 1])
+    print(plane[y - 1, x - 2])
     neighbors = 0
-    for hor in [x-1, x, x+1]:
-        for ver in [y-1, y, y+1]:
-            if not hor == ver == "o" and (plane == "o" or (0 <= x + hor < x and 0 <= y + ver < y)):
-                neighbors += plane[(y + ver) % y][(x + hor) % x]
+    for i in plane:
+        for j in plane:
+            #if i == x - 1 and j == y - 1:
+                #continue
+            if plane[plane == "True"]: # NO IDEA WHAT IS WRONG WITH THIS AND IT'S MAKING ME SAD
+                neighbors += 1
     return neighbors
 
 
@@ -57,10 +62,11 @@ def play_life():
     steps = input("How many times should the simulation be ran?: ")
     world = empty_plane(x, y)
     world = seed_plane(world)
-    world = print_plane(world)
-    neighbors = count_neighbors(world, 1, 1)
+    old_world = print_plane(world)
+    neighbors = count_neighbors(world, 2, 2)
     print(neighbors)
     print(world)
+
 
 # empty_plane test - COMPLETE
 # print(empty_plane(10, 10))
@@ -80,4 +86,3 @@ def play_life():
 
 # play_life - INCOMPLETE
 play_life()
-
