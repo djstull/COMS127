@@ -1,80 +1,78 @@
 # David James Kay Stull
-# Com Sci 127
+# Computer Science 127
 
-import sys
-import time
-import numpy as np
+# This script contains the code for running the simulation for Conway's Game of Life.
+# The other script includes the logic code for the simulation. I separated them for ease of
+# use and to help with organization during programming.
 
+# This script has the run_timestep, seed_plane_position, run_timestep, and play_life functions.
+# The other required functions are inside environment.py.
 
-def empty_plane(x, y):
-    world = np.full((y, x), False).reshape(y, x)
-    return world
-
-
-def seed_plane_position(plane, x, y):
-    plane[y-1, x-1] = True
-    return plane
+from environment import Environment
+from time import sleep
+import random
+import copy
 
 
-def seed_plane(plane):
-    answer = ""
-    while answer != "EOF":
-        answer = input("Please input the coordinates you wish to change. Type EOF when finished.: ")
-        if answer == "EOF":
-            world = world
-            pass
-        else:
-            answer = answer.split()
-            cordx = int(answer[0])
-            cordy = int(answer[1])
-            world = seed_plane_position(plane, cordx, cordy)
-            print(world)
-    return world
+# Allows user to set size of environment
+def set_size(rws, clmns):
+    global x, y, env
+    x = rws
+    y = clmns
+    env = Environment(x, y)
 
 
-def print_plane(plane):
-    plane = plane.astype(str)
-    plane[plane == "True"] = "o"
-    plane[plane == "False"] = " "
-
-    return plane
-
-
-def count_neighbors(plane, x, y):
-    neighbors = 0
-
-    return neighbors
+# Run the simulation one time/
+def run_timestep():
+    old_env = copy.copy(env)
+    for i in range(len(old_env.matrix)):
+        for n in range(len(old_env.matrix[0])):
+            if old_env.count_neighbors(i, n) < 2 or old_env.count_neighbors(i, n) > 3:
+                env.set_dead(i, n)
+            elif not old_env.alive[(i, n)] and old_env.count_neighbors(i, n) == 3:
+                env.seed_plane(i, n)
+    env.print_plane()
 
 
+# Generates a random initial state of alive and dead cells
+def generate():
+    for i in range(x):
+        for n in range(y):
+            if random.choice([True, False]):
+                env.seed_plane(i, n)
+    env.print_plane()
+
+
+# Change plane values to True / alive
+def seed_plane_position(*positions):
+    for p in positions:
+        env.seed_plane(*p)
+    env.print_plane()
+
+
+# Runs the Game of Life
 def play_life():
-    x = input("Please input the X dimension for the world: ")
-    y = input("Please input the Y dimension for the world: ")
-    x = int(x)
-    y = int(y)
-    steps = input("How many times should the simulation be ran?: ")
-    world = empty_plane(x, y)
-    world = seed_plane(world)
-    world = print_plane(world)
-    neighbors = count_neighbors(world, 1, 1)
-    print(neighbors)
-    print(world)
+    xcord = input("Please input the dimension (x) for the grid: ")
+    ycord = input("Please input the dimension (y) for the grid: ")
+    xcord = int(xcord)
+    ycord = int(ycord)
 
-# empty_plane test - COMPLETE
-# print(empty_plane(10, 10))
+    set_size(xcord, ycord)
 
-# seed_plane_position - COMPLETE
-# print(seed_plane_position(world, 4, 4))
+    times = input("How many times should the simulation be ran?: ")
+    times = int(times)
 
-# seed_plane - INCOMPLETE - NEEDS TO TAKE TXT INPUT
-# print(seed_plane(world))
+    t = -1
+    while True:
+        if t == -1:
+            generate()
+        else:
+            run_timestep()
+        t += 1
+        times -= 1
+        sleep(1)
+        if times <= 0:
+            break
 
-# print_plane - COMPLETE
-# print(print_plane(world))
-
-# count_neighbors
-# print(count_neighbors(world, 1, 1))
-
-
-# play_life - INCOMPLETE
+# You can run the game using the play_life():
 play_life()
-
