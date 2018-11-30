@@ -42,10 +42,7 @@ def print_plane(plane):
 
 def count_neighbors(plane, x, y):
     neighbors = 0
-    for hor in [x-1, x, x+1]:
-        for ver in [y-1, y, y+1]:
-            if not hor == ver == "o" and (plane == "o" or (0 <= x + hor < x and 0 <= y + ver < y)):
-                neighbors += plane[(y + ver) % y][(x + hor) % x]
+
     return neighbors
 
 
