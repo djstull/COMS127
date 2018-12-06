@@ -1,7 +1,6 @@
 # David James (DJ) Stull
-# Com Sci 127
-# This script has four functions that are all useful in converting back and forth in between decimal (base 10) numbers
-# and balanced ternary numbers.
+# Com S 127
+
 
 def convert_to_decimal(n):
     # Takes any balanced ternary number and converts it to the base 10 decimal equivalent.
@@ -30,62 +29,49 @@ def convert_to_decimal(n):
 
 
 def convert_to_balanced_ternary(n):
-    # Converts a decimal number to a balanced ternary number.
-
-    if n == 0:
-        return ['0']
-
-    # Check for negative numbers
-    neg = (n < 0)
-    if neg:
-        n *= -1
-
-    rem = 0
-    out = []
-
-    while n >= 0 and not (n == 0 and rem == 1):
-        rem, n = n % 3, n // 3
-        if rem == 0:
-            out.append('0')
-        elif rem == 1:
-            out.append('+')
-        else:
-            out.append('-')
-            n += 1
-    out.reverse()
-
-    # Finally outputs the balanced ternary form of the decimal number. If the decimal was negative,
-    # outputs the negate of the outputted balanced ternary instead.
-
-    if neg:
-        out = "".join(out)
-        outneg = negate(out)
-        return outneg
+    if n < 0:
+        isneg = True
+    elif n > 0:
+        isneg = False
     else:
-        out = "".join(out)
-        return out
+        isneg = "Zero"
+
+    if isneg is True:
+        n = str(n)
+        n = n.replace("-", "")
+    else:
+        pass
+
+    n = str(n)
+    counter = len(n)
+    print(counter)
+    n = int(n)
+
+    output = ""
+
+    while counter >= 0:
+        conv = (n % 3)
+        if conv == 0:
+            output = output + "0"
+        elif conv == 1:
+            output = output + "+"
+        elif conv == -1:
+            output = output + "-"
+        counter = counter - 1
+    return output
+
+
 
 
 def negate(n):
     # Makes any balanced ternary number negative.
-    # Builds the negated string character by character.
+    # It replaces + with NULL first in order to avoid copying over the newly replaced - characters.
 
-    balanced = is_valid_balanced_ternary(n)
-    neg = ""
-    if balanced is True:
-        for i in n:
-            if i == "+":
-                neg = neg + "-"
-            elif i == "-":
-                neg = neg + "+"
-            elif i == "0":
-                neg = neg + "0"
-            else:
-                pass
-        return neg
-    else:
-        print("ERROR: n is not a balanced ternary.")
-        return 0
+    for i in n:
+        n = n.replace("+", "NULL")
+        n = n.replace("-", "+")
+        n = n.replace("NULL", "-")
+    return n
 
 
 def is_valid_balanced_ternary(n):
@@ -99,4 +85,31 @@ def is_valid_balanced_ternary(n):
 
     return set(n).issubset({"+", "-", "0"})
 
-# See bt_test.py for numerous test cases for each of the functions/
+# Test cases for BALANCED TERNARY CHECK -- Complete
+# print(is_valid_balanced_ternary("+-+--0-+0"))
+# print(is_valid_balanced_ternary("---------"))
+# print(is_valid_balanced_ternary("+++++++r++"))
+# print(is_valid_balanced_ternary("000000000"))
+
+# Test cases for NEGATE -- Complete
+# print(negate("+-+--0-+0"))
+# print(negate("+++++++++"))
+# print(negate("---------"))
+# print(negate("000000000"))
+
+# Test cases for CONVERT TO DECIMAL -- Complete
+# print(convert_to_decimal("+-+--0-+0"))
+# ^ Should be 4773
+# print(convert_to_decimal("-+++0-"))
+# ^ Should be -127
+# print(convert_to_decimal("++"))
+# ^ Should be 4
+# print(convert_to_decimal(69))
+# ^ Should print error and return 0
+
+
+# Test cases for CONVERT TO BALANCED TERNARY -- Incomplete
+print(convert_to_balanced_ternary(4))
+# ^ Should return ++
+print(convert_to_balanced_ternary(4773))
+# ^ Should return +-+--0-+0
